@@ -1,22 +1,27 @@
 # Lessons worth keeping
 
-- top level agent should remain unblocked to talk to me (and orchestrate subagents who will investigate and run shells and edit files), with a monitor every 10 minutes to be aware of real time (and poke subagents for status report if they churn unexpectedly long, check upstream git few times a day, keep HTML report up-to-date with temporary open questions vs persistent records, and reflect on consequences of already dispatched actions on the state of the environment)
-  - keep reference-able numbering scheme (e.g. qNN for questions, tNN for tests (some of them will need to be retested), le.NN for loose ends), never restart from 1 or a naked <ol>
-  - on multi-day features and/or after compaction, keep an append-only ledger of Peter's rulings and agreed constraints, find previous trajectories in ~/.claude if needed
-  - don't repeat yourself, say "..." if forced to say something by the harness and nothing is new since last reply to genuine user interaction
-  - mid-turn messages may get lost in the harness (as reported by Fable when I complained), your conversation with subagents is invisible to me, keep in mind what I can and cannot see in the TUI (though I can use remote controll app to see screenshots from you if needed)
+- top level agent should remain unblocked to talk to me (and orchestrate subagents who will investigate and run shells and edit files)
+  - keep reference-able numbering scheme instead of naked <ol> or starting similar list from 1
+  - after starting subagents or background shell, arm a monitor that will ping you every 10 minutes to tell you real time (not just elapsed wall clock) and latest output (not number of lines) making sure everyone is on task without side-quest joyride / doom loops
+  - if remote controlled / without user replies for almost 1 hour and work is still in progress, make sure the windows host machine won't go to sleep yet
+  - don't repeat yourself, say "…" if forced to say something by the harness and nothing is new since last reply to genuine user interaction
+  - mid-turn messages may get lost in the harness, your conversation with subagents is invisible to me, keep in mind what I can and cannot see in the TUI (though I can use remote control app to see screenshots from you if needed)
   - most important reflection is when saying words that change steering direction but some actions were already dispatched based on previous understanding
-  - remind me about long sitting periods and back exercises plz (compare start of session and gaps in my responses with inferred breaks vs 2+ hours continuous churn, in local timezone)
-- green e2e/unit that didn't start red is a fake signal, not proof: instant mocks mask races. A test that can't fail on the real bug is worse than no test. Also never pipe a test runner through tail/head/etc — swallowed exit codes once kept a whole playwright suite fake-green for weeks
-  - nothing is fixed/done/final until Peter verifies — agents should become suspicious if then notice they self-declared any work as such
+- green e2e/unit that didn't start red is a fake signal, not proof: instant mocks mask races. A test that can't fail on the real bug is worse than no test.
+  - nothing is fixed/done/final until Peter verifies
 - never git-push yourself, and keep only a few semantic commits per branch updated with amend/rebase (use reflog for history, I know how to use git, both CLI and GUI diff tools)
-- `~/git/inspect_ai` has git submodule ts-mono from with to run pnpm dev
+- `~/git/inspect_ai` has git submodule ts-mono
   - and a sibling repo in `~/git/inspect_scout` that should be used for scout view BE when testing ts-mono
+  - everything to be started by me (Peter) using `devup`, ports 7575, 7576, 5173, 5174 should be occupied when working on inspect viewer (and 7676 from the vscode/cursor extension)
   - and both are consumed by `~/git/hawk` which also needs `~/git/hawk-config` when updating to newest main for pulumi up (which needs aws login and npmjs tokens for publishing beta packages, but not all changes in ts-mono need testing in hawk)
-  - running evals is fine, but when editing existing log files, ask me to restart pnpm dev
+  - CHANGELOG is up to maintainers (ts-mono bump needs to be from main branch after merge, no need to remind me, but thank you for the gesture)
+  - running a new inspect eval is fine, but while I am testing hold still
 - instead of ending a turn with an A/B option menu or "shall I", pick the best option
-  - applies to code choices, not when [there is ambiguity in my directions and you want to ask for better steering]
-  - when auto-decided, say which option and why in one line and proceed; summarize inflection points and alternatives together witch chosen deliverable at the end of turn, not mid-turn
+  - applies to code choices, not when there is ambiguity in my directions and you want to ask for better steering
+  - when auto-decided, say which option and why in one line and proceed; summarize inflection points and alternatives together with chosen deliverable at the end of turn, not mid-turn
   - uncalibrated magic constants may be empirical if intentionally provided by a human or slop if guessed by an agent, discussion about those is always useful (and annotate at write time with short code comment if resolved)
-- for reviewers: a paragraph of comment about a workaround usually idicates the code is wrong — same for timing hacks (setTimeout/rAF/settle windows)
-  - independent models are available via Cursor CLI: `agent -p --model cursor-grok-4.5-high` is basically for free and as good as opus 4.8, `agent -p --model gpt-5.6-sol-high` for real work is much better than fable at computer use and raw instruction following to solve problems in any way necessary, but has worse taste and intuitions and produces tons of slop code (but they both can criticize their own code if asked about the code in a new thread while fable is complete shit at recognizing its own blind spots even between sessions)
+- tell the full useful truth: answer the question I asked, not the nearest safe version of it (if you narrowed it, say so in one clause)
+  - being wrong is cheap to correct by followup verification, being vague is expensive when I have to notice the gaps and ask again
+  - when caught in an error: one-line correction, then move on, no defensive epistemics essay, no extra caution theater in the following replies
+- for reviewers: a paragraph of comment about a workaround usually indicates the code is wrong - same for timing hacks (setTimeout/rAF/settle windows)
+  - independent models are available via Cursor CLI: `agent -p --model cursor-grok-4.5-high` is basically for free and as good as opus 4.8, `agent -p --model gpt-5.6-sol-high` for precise instruction following and completing hard work (but questionable taste in code style)
