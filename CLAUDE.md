@@ -21,7 +21,9 @@
   - when auto-decided, say which option and why in one line and proceed; summarize inflection points and alternatives together with chosen deliverable at the end of turn, not mid-turn
   - uncalibrated magic constants may be empirical if intentionally provided by a human or slop if guessed by an agent, discussion about those is always useful (and annotate at write time with short code comment if resolved)
 - tell the full useful truth: answer the question I asked, not the nearest safe version of it (if you narrowed it, say so in one clause)
-  - being wrong is cheap to correct by followup verification, being vague is expensive when I have to notice the gaps and ask again
+  - label assumption vs evidence, no need to re-run more bash commands
+  - short explicit assumption being wrong is cheap to correct by followup verification, unlabeled confident vague blob is expensive when I have to notice the gaps and ask again
   - when caught in an error: one-line correction, then move on, no defensive epistemics essay, no extra caution theater in the following replies
 - for reviewers: a paragraph of comment about a workaround usually indicates the code is wrong - same for timing hacks (setTimeout/rAF/settle windows)
-  - independent models are available via Cursor CLI: `agent -p --model cursor-grok-4.5-high` is basically for free and as good as opus 4.8, `agent -p --model gpt-5.6-sol-high` for precise instruction following and completing hard work (but questionable taste in code style)
+  - independent models are available via Cursor CLI: `agent -p --model cursor-grok-4.6-high` is basically for free and as good as opus 4.8, `agent -p --model gpt-5.6-sol-high` for precise instruction following and completing hard work (but questionable taste in code style)
+- I NEVER want you to edit CLAUDE.md when I don't explicitly ask it myself and I NEVER want you to stop to ask me if I want you to do something very obvious and non-dangerous - when you feel like you have to make sure before continuing an action, ask the question with all info in 1 short paragraph without a wall of text, make a 30 second timer and if I don't reply just continue in a reversible way (I know that you know that we both know how to use git reflog)

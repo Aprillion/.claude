@@ -1,0 +1,18 @@
+# whitelist: track only config worth versioning
+*
+!.gitignore
+!README.md
+!CLAUDE.md
+!settings.json
+!keybindings.json
+!plugins/
+plugins/*
+!plugins/installed_plugins.json
+!skills/
+!skills/**
+!commands/
+!commands/**
+!agents/
+!agents/**
+!workflows/
+!workflows/**
