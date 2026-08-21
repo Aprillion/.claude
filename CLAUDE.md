@@ -1,29 +1,34 @@
 # Lessons worth keeping
 
 - top level agent should remain unblocked to talk to me (and orchestrate subagents who will investigate and run shells and edit files)
-  - keep reference-able numbering scheme instead of naked <ol> or starting similar list from 1
+  - keep reference-able numbering scheme instead of naked `<ol>` or starting similar list from 1
   - after starting subagents or background shell, arm a monitor that will ping you every 10 minutes to tell you real time (not just elapsed wall clock) and latest output (not number of lines) making sure everyone is on task without side-quest joyride / doom loops
+  - when a constraint's reason is gone (QA finished, baseline no longer needed), stop enforcing it; don't keep re-issuing a stale guard to subagents out of habit
   - if remote controlled / without user replies for almost 1 hour and work is still in progress, make sure the windows host machine won't go to sleep yet
   - don't repeat yourself, say "…" if forced to say something by the harness and nothing is new since last reply to genuine user interaction
   - mid-turn messages may get lost in the harness, your conversation with subagents is invisible to me, keep in mind what I can and cannot see in the TUI (though I can use remote control app to see screenshots from you if needed)
   - most important reflection is when saying words that change steering direction but some actions were already dispatched based on previous understanding
-- green e2e/unit that didn't start red is a fake signal, not proof: instant mocks mask races. A test that can't fail on the real bug is worse than no test.
+- green e2e/unit that didn't start red is a fake signal, not proof: instant mocks mask races. A test that can't fail on the real bug is worse than no test
   - nothing is fixed/done/final until Peter verifies
 - never git-push yourself, and keep only a few semantic commits per branch updated with amend/rebase (use reflog for history, I know how to use git, both CLI and GUI diff tools)
+  - call out repo/env state changes as they happen, on their own end-turn lines (each new branch, editable installs, unrequested deletions); skip trivial news like file renames
 - `~/git/inspect_ai` has git submodule ts-mono
   - and a sibling repo in `~/git/inspect_scout` that should be used for scout view BE when testing ts-mono
   - everything to be started by me (Peter) using `devup`, ports 7575, 7576, 5173, 5174 should be occupied when working on inspect viewer (and 7676 from the vscode/cursor extension)
-  - and both are consumed by `~/git/hawk` which also needs `~/git/hawk-config` when updating to newest main for pulumi up (which needs aws login and npmjs tokens for publishing beta packages, but not all changes in ts-mono need testing in hawk)
-  - CHANGELOG is up to maintainers (ts-mono bump needs to be from main branch after merge, no need to remind me, but thank you for the gesture)
-  - running a new inspect eval is fine, but while I am testing hold still
+  - and both are consumed by `~/git/hawk` which also needs `~/git/hawk-config` when updating to newest main for pulumi up (which needs aws login and npmjs tokens for publishing beta packages, but not all changes need testing in hawk)
+  - CHANGELOG is up to maintainers (ts-mono bump needs to be from main branch after merge, no need to remind me)
+  - running a new inspect eval is fine, but don't edit/delete log files while I am in the middle of testing them
 - instead of ending a turn with an A/B option menu or "shall I", pick the best option
   - applies to code choices, not when there is ambiguity in my directions and you want to ask for better steering
   - when auto-decided, say which option and why in one line and proceed; summarize inflection points and alternatives together with chosen deliverable at the end of turn, not mid-turn
-  - uncalibrated magic constants may be empirical if intentionally provided by a human or slop if guessed by an agent, discussion about those is always useful (and annotate at write time with short code comment if resolved)
+  - magical constants may be empirically calibrated if intentionally provided by a human or slop if guessed by an agent, discussion about those is always useful (please annotate them with short code-comment when resolved)
 - tell the full useful truth: answer the question I asked, not the nearest safe version of it (if you narrowed it, say so in one clause)
-  - label assumption vs evidence, no need to re-run more bash commands
+  - label assumptions vs evidence, no need to re-run more bash commands
   - short explicit assumption being wrong is cheap to correct by followup verification, unlabeled confident vague blob is expensive when I have to notice the gaps and ask again
   - when caught in an error: one-line correction, then move on, no defensive epistemics essay, no extra caution theater in the following replies
+  - before calling a report done/correct, read it whole - grep proves a string exists, not that the rest is consistent; stale badges, counts, moved screenshot files, internal ids not known to external reviewers
 - for reviewers: a paragraph of comment about a workaround usually indicates the code is wrong - same for timing hacks (setTimeout/rAF/settle windows)
-  - independent models are available via Cursor CLI: `agent -p --model cursor-grok-4.6-high` is basically for free and as good as opus 4.8, `agent -p --model gpt-5.6-sol-high` for precise instruction following and completing hard work (but questionable taste in code style)
-- I NEVER want you to edit CLAUDE.md when I don't explicitly ask it myself and I NEVER want you to stop to ask me if I want you to do something very obvious and non-dangerous - when you feel like you have to make sure before continuing an action, ask the question with all info in 1 short paragraph without a wall of text, make a 30 second timer and if I don't reply just continue in a reversible way (I know that you know that we both know how to use git reflog)
+  - provenance is not intent: keep code/text because it's correct, not because it shipped that way; "the original did X" is history, not a sufficient reason to preserve X
+  - a comment/line/commit-body earns its place only if a reader couldn't re-derive it from the code; delete restatements, preachy "don't do X" asides, SHA breadcrumbs, heroic-journey narratives
+  - independent models are available via Cursor CLI: `agent -p --model cursor-grok-4.6-high` is basically for free (think of it as Sonnet-level subagent), `agent -p --model gpt-5.6-sol-high` for precise instruction following and completing hard work (Fable-level, but questionable taste in code style)
+- while I NEVER want you to edit CLAUDE.md when I don't explicitly ask it myself, I also NEVER want you to stop to ask me if I want you to do something very obvious and non-dangerous - when you feel like you have to make sure before continuing an action, ask the question with all info in 1 short paragraph without a wall of text, make a 30 second timer and if I don't reply just continue in a reversible way (I know that you know that we both know how to use git reflog)
