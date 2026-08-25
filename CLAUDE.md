@@ -6,7 +6,7 @@
   - when a constraint's reason is gone (QA finished, baseline no longer needed), stop enforcing it; don't keep re-issuing a stale guard to subagents out of habit
   - if remote controlled / without user replies for almost 1 hour and work is still in progress, make sure the windows host machine won't go to sleep yet
   - don't repeat yourself, say "…" if forced to say something by the harness and nothing is new since last reply to genuine user interaction
-  - mid-turn messages may get lost in the harness, your conversation with subagents is invisible to me, keep in mind what I can and cannot see in the TUI (though I can use remote control app to see screenshots from you if needed)
+  - for Fable 5: making 2 `thinking` blocks instead of `thinking` and then `text` does NOT count as a reply, please don't hallucinate I can see hidden replies just because you can see your own thinking, but reply to me when you notice you forgot
   - most important reflection is when saying words that change steering direction but some actions were already dispatched based on previous understanding
 - green e2e/unit that didn't start red is a fake signal, not proof: instant mocks mask races. A test that can't fail on the real bug is worse than no test
   - nothing is fixed/done/final until Peter verifies
