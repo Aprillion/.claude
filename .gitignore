@@ -16,3 +16,6 @@ plugins/*
 !agents/**
 !workflows/
 !workflows/**
+
+# machine-synced copies of Anthropic skills (uuid-keyed cache), not authored here
+skills/synced/

@@ -31,12 +31,10 @@
       "Bash(readlink:*)",
       "Bash(realpath:*)"
     ],
-    "deny": [
-      "Bash(git push:*)"
-    ],
+    "deny": [],
     "defaultMode": "auto"
   },
-  "model": "fable[1m]",
+  "model": "claude-fable-5-1[1m]",
   "enabledPlugins": {},
   "effortLevel": "high",
   "promptSuggestionEnabled": false,
